@@ -1,0 +1,39 @@
+dependencies {
+    // kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
+
+    //androidx
+    implementation "androidx.appcompat:appcompat:${versions.appcompat}"
+    implementation "androidx.constraintlayout:constraintlayout:${versions.constraintlayout}"
+    implementation "androidx.recyclerview:recyclerview:${versions.recyclerview}"
+    implementation "androidx.core:core-ktx:${versions.core_ktx}"
+    implementation "androidx.legacy:legacy-support-v4:${versions.legacy_support}"
+    implementation "androidx.legacy:legacy-support-core-utils:${versions.legacy_support}"
+    implementation "com.google.android.material:material:${versions.material}"
+
+
+    // Dependency Injection - Dagger
+    implementation "com.google.dagger:dagger:${versions.dagger}"
+    implementation  "com.google.dagger:dagger-android:${versions.dagger}"
+    kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
+    kapt "com.google.dagger:dagger-android-processor:${versions.dagger}"
+    compileOnly 'javax.annotation:jsr250-api:1.0'
+
+    // Rest Service - Retrofit
+    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+    implementation "com.squareup.okhttp3:okhttp:${versions.okhttp}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
+
+    // Gson
+    implementation "com.google.code.gson:gson:${versions.gson}"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:${versions.glide}"
+    kapt "com.github.bumptech.glide:compiler:${versions.glide}"
+
+    // Room
+    implementation "androidx.room:room-runtime:${versions.room}"
+    annotationProcessor "androidx.room:room-compiler:${versions.room}"
+    implementation "androidx.room:room-ktx:${versions.room}"
+}
