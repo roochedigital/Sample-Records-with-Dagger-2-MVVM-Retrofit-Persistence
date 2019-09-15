@@ -2,7 +2,7 @@ package com.dearwolves.samplerecords.components
 
 import com.dearwolves.core.dagger.CoreComponent
 import com.dearwolves.core.dagger.FeatureScope
-import com.dearwolves.samplerecords.activities.HomeActivity
+import com.dearwolves.samplerecords.ui.home.HomeActivity
 import dagger.Component
 
 @FeatureScope

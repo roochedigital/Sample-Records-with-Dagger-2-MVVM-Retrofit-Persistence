@@ -7,7 +7,7 @@
         <import type="android.view.View"/>
         <variable
             name="viewHolder"
-            type="com.dearwolves.samplerecords.adapters.MediaListAdapter.ViewHolder" />
+            type="com.dearwolves.samplerecords.ui.home.MediaListAdapter.ViewHolder" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -34,8 +34,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintDimensionRatio="H,1:1.3"
-                />
+                app:layout_constraintDimensionRatio="H,1:1.3" />
 
             <TextView
                 android:id="@+id/title"

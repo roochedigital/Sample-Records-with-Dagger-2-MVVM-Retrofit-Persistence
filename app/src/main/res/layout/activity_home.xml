@@ -7,13 +7,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.dearwolves.samplerecords.viewmodels.HomeViewModel" />
+            type="com.dearwolves.samplerecords.ui.home.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activities.HomeActivity">
+        tools:context=".ui.home.HomeActivity">
 
 
         <androidx.recyclerview.widget.RecyclerView

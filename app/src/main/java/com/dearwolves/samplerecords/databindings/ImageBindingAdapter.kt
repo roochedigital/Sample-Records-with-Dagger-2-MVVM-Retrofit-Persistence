@@ -5,7 +5,7 @@ import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.dearwolves.core.utilities.GlideApp
 
-object ImageBindingAdapter{
+object ImageBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("android:load_img")
