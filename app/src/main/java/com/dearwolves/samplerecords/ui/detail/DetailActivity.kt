@@ -12,8 +12,6 @@ import javax.inject.Inject
 
 class DetailActivity : AppCompatActivity() {
 
-    private val GridSize = 3
-
     @Inject
     lateinit var mediaService: IMediaService
 
