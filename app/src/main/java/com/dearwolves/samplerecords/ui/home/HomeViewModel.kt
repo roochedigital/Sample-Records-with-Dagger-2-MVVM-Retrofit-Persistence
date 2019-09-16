@@ -13,17 +13,17 @@ class HomeViewModel (private val mediaService: IMediaService, private val string
     var error = MutableLiveData<String>()
     var changesNotification = MutableLiveData<Void>()
     var loading = MutableLiveData<Boolean>()
-    var emptyLayoutMessage = MutableLiveData<String>()
+    var emptyDisplayMessage = MutableLiveData<String>()
 
     var data = ArrayList<MediaResponse>()
 
     fun init() {
         changesNotification.observeForever {
             if(data.size == 0) {
-                emptyLayoutMessage.value = "There is nothing here"
+                emptyDisplayMessage.value = "There is nothing here"
             }
             else {
-                emptyLayoutMessage.value = ""
+                emptyDisplayMessage.value = ""
             }
         }
     }

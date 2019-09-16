@@ -5,6 +5,9 @@
     android:id="@+id/layout">
 
     <data>
+        <import type="android.text.TextUtils" />
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.dearwolves.samplerecords.ui.home.HomeViewModel" />
@@ -27,6 +30,31 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tvNoItems"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            app:layout_constraintBottom_toBottomOf="@+id/rvMedia"
+            app:layout_constraintEnd_toEndOf="@+id/rvMedia"
+            app:layout_constraintStart_toStartOf="@+id/rvMedia"
+            app:layout_constraintTop_toTopOf="@+id/rvMedia"
+            android:visibility="@{ TextUtils.isEmpty(viewModel.emptyDisplayMessage) ? View.GONE : View.VISIBLE }"
+            android:text="@{ viewModel.emptyDisplayMessage }"
+            tools:text="This is an error message, what do you think of it?" />
+
+
+        <ProgressBar
+            android:id="@+id/pbLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="@{viewModel.loading ? View.VISIBLE : View.GONE}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
