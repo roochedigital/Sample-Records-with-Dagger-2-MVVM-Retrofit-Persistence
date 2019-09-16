@@ -10,8 +10,6 @@ import com.dearwolves.core.interfaces.IRestService;
 import com.dearwolves.core.interfaces.IStringService;
 import com.dearwolves.core.model.MediaResponse;
 import com.dearwolves.core.model.SearchRequest;
-import com.dearwolves.core.model.dto.responses.ListResponseDto;
-import com.dearwolves.core.model.dto.responses.MediaResponseDto;
 import com.dearwolves.core.rest.RestRequestCallback;
 import com.dearwolves.samplerecords.ui.home.HomeViewModel;
 
@@ -21,17 +19,10 @@ import org.junit.Test;
 import org.junit.rules.TestRule;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doAnswer;
