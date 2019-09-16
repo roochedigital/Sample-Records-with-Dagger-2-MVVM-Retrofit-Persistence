@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout">
+
+    <data>
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.detail.DetailActivity">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="20dp" />
+
+        <ImageView
+            android:id="@+id/imageHeader"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="9:5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/sample" />
+
+        <ImageView
+            android:id="@+id/imagePoster"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:contentDescription="@null"
+            app:layout_constraintBottom_toBottomOf="@+id/imageHeader"
+            app:layout_constraintDimensionRatio="w,2:3"
+            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/imageHeader"
+            app:srcCompat="@drawable/sample" />
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Wonder Woman Collections"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintEnd_toStartOf="@+id/imageButton"
+            app:layout_constraintStart_toEndOf="@+id/imagePoster"
+            app:layout_constraintTop_toBottomOf="@+id/imageHeader"
+            tools:text="Wonder Woman Collections" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="@null"
+            android:tint="@color/colorAccent"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+            app:layout_constraintTop_toBottomOf="@+id/imageHeader"
+            app:srcCompat="@drawable/ic_bookmark_black_24dp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Power. Grace. Wisdom. Wonder."
+            app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+            app:layout_constraintStart_toStartOf="@+id/textTitle"
+            app:layout_constraintTop_toBottomOf="@+id/textTitle"
+            tools:text="Power. Grace. Wisdom. Wonder." />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="20dp"
+            android:clickable="true"
+            app:fabSize="normal"
+            app:layout_constraintEnd_toStartOf="@+id/floatingActionButton2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/guidelineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/line"
+            app:srcCompat="@drawable/ic_star_black_24dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton2"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="20dp"
+            android:clickable="true"
+            app:fabSize="normal"
+            app:layout_constraintEnd_toStartOf="@+id/floatingActionButton3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/floatingActionButton"
+            app:layout_constraintTop_toBottomOf="@+id/line"
+            app:srcCompat="@drawable/ic_group_black_24dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton3"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="20dp"
+            android:clickable="true"
+            app:fabSize="normal"
+            app:layout_constraintEnd_toStartOf="@+id/floatingActionButton4"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/floatingActionButton2"
+            app:layout_constraintTop_toBottomOf="@+id/line"
+            app:srcCompat="@drawable/ic_view_carousel_black_24dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton4"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="20dp"
+            android:clickable="true"
+            app:fabSize="normal"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/floatingActionButton3"
+            app:layout_constraintTop_toBottomOf="@+id/line"
+            app:srcCompat="@drawable/ic_bookmark_black_24dp"
+            tools:layout_editor_absoluteY="344dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"
+            android:text="TextView"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@+id/floatingActionButton"
+            app:layout_constraintStart_toStartOf="@+id/floatingActionButton"
+            app:layout_constraintTop_toBottomOf="@+id/floatingActionButton"
+            tools:text="242 ratings" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"
+            android:text="TextView"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@+id/floatingActionButton2"
+            app:layout_constraintStart_toStartOf="@+id/floatingActionButton2"
+            app:layout_constraintTop_toBottomOf="@+id/floatingActionButton2"
+            tools:text="Family" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"
+            android:text="TextView"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@+id/floatingActionButton3"
+            app:layout_constraintStart_toStartOf="@+id/floatingActionButton3"
+            app:layout_constraintTop_toBottomOf="@+id/floatingActionButton3"
+            tools:text="Similiar" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"
+            android:text="TextView"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@+id/floatingActionButton4"
+            app:layout_constraintStart_toStartOf="@+id/floatingActionButton4"
+            app:layout_constraintTop_toBottomOf="@+id/floatingActionButton4"
+            tools:text="Bookmarks" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="An Amazon princess comes to the world of Man to become the greatest of the female superheroes."
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@+id/guidelineRight"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+            app:layout_constraintTop_toBottomOf="@+id/line2"
+            tools:text="An Amazon princess comes to the world of Man to become the greatest of the female superheroes." />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

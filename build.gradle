@@ -3,7 +3,7 @@ buildscript { scriptHandler ->
             to: scriptHandler
 
     ext.versions = [
-            'min_version'                           : 15,
+            'min_version'                           : 21,
             'target_version'                        : 28,
             'compile_version'                       : 28,
 
