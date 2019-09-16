@@ -39,7 +39,7 @@ class DetailActivity : AppCompatActivity() {
             .inject(this@DetailActivity)
 
         val i = intent
-        val mediaResponse: MediaResponse = i.getParcelableExtra(ITEM)
+        val mediaResponse:MediaResponse = i.getParcelableExtra(ITEM)
 
 
         viewModel = DetailViewModel(mediaResponse, localRepository)
@@ -49,6 +49,6 @@ class DetailActivity : AppCompatActivity() {
         binding.viewModel = viewModel
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Sample Title"
+        supportActionBar?.title = mediaResponse.trackName
     }
 }

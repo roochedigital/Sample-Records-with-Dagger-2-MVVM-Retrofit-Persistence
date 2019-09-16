@@ -13,13 +13,10 @@ interface MediaResponseDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAll(vararg todo: MediaResponse)
 
-    @Query("UPDATE mediaresponse SET is_bookmark = 0")
-    fun setBookmarkFalse()
+    @Query("UPDATE mediaresponse SET is_bookmark = 0 WHERE track_id = :trackId")
+    fun setBookmarkFalse(trackId: Int = 0)
 
     @Query("UPDATE mediaresponse SET is_bookmark = 1 WHERE track_id = :trackId")
     fun setBookmarkTrue(trackId: Int = 0)
-
-    @Query("SELECT * FROM mediaresponse WHERE is_bookmark = 1")
-    fun getBookMark(): MediaResponse
 
 }

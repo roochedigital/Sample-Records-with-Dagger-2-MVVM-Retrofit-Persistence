@@ -53,7 +53,7 @@ class HomeActivity : AppCompatActivity(), IOnItemSelected<MediaResponse> {
             .getRecordComponent()
             .inject(this@HomeActivity)
 
-        viewModel = HomeViewModel(mediaService, stringService, localRepository)
+        viewModel = HomeViewModel(mediaService, stringService, localRepository, sharedPreferenceService)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
         binding.lifecycleOwner = this
@@ -77,17 +77,17 @@ class HomeActivity : AppCompatActivity(), IOnItemSelected<MediaResponse> {
             Snackbar.make(binding.root, t, Snackbar.LENGTH_LONG).show()
         })
 
-        viewModel.init()
-        viewModel.search(SearchRequest("star", "au", "movie"))
+        viewModel.lastVisit.observe(this, Observer { t ->
+            binding.lastVisit.visibility = if(TextUtils.isEmpty(t)) View.GONE else View.VISIBLE
 
-        if(!TextUtils.isEmpty(sharedPreferenceService.getLastVisit())) {
             val sb = StringBuilder()
-            sb.append("Last Visit: ").append(sharedPreferenceService.getLastVisit())
+            sb.append(stringService.get(R.string.last_visit)).append(sharedPreferenceService.getLastVisit())
 
             binding.lastVisit.text = sb.toString()
-        } else {
-            binding.lastVisit.visibility = View.INVISIBLE
-        }
+        })
+
+        viewModel.init()
+        viewModel.search(SearchRequest("star", "au", "movie"))
     }
 
     override fun onSelected(item: MediaResponse) {
@@ -96,12 +96,8 @@ class HomeActivity : AppCompatActivity(), IOnItemSelected<MediaResponse> {
         startActivity(intent)
     }
 
-    override fun onStop() {
-        sharedPreferenceService.saveLastVisit(Date())
-        super.onStop()
-    }
-
     override fun onDestroy() {
+        sharedPreferenceService.saveLastVisit(Date())
         viewModel.onDestroy()
         super.onDestroy()
     }

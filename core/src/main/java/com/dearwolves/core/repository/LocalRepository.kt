@@ -20,12 +20,13 @@ class LocalRepository(recordDatabase: RecordDatabase) {
         Insertion(dao).execute(mediaResponses)
     }
 
-    fun bookmarkData(trackId: Int) {
-        Bookmark(dao).execute(trackId)
-    }
-
-    fun getBookmark(): MediaResponse? {
-        return GetBookmark(dao).execute().get()
+    fun bookmarkData(trackId: Int, toBookmark:Boolean) {
+        if (toBookmark) {
+            Bookmark(dao).execute(trackId)
+        }
+        else {
+            UnBookmark(dao).execute(trackId)
+        }
     }
 
     companion object {
@@ -42,20 +43,20 @@ class LocalRepository(recordDatabase: RecordDatabase) {
         class Bookmark(private val dao: MediaResponseDao) : AsyncTask<Int, Void, Void?>() {
             override fun doInBackground(vararg params: Int?): Void? {
                 params[0]?.let {
-                    dao.setBookmarkFalse()
                     dao.setBookmarkTrue(it)
                 }
                 return null
             }
         }
 
-        class GetBookmark(private val dao: MediaResponseDao) : AsyncTask<Void, Void, MediaResponse?>() {
-            override fun doInBackground(vararg params: Void?): MediaResponse? {
-                return dao.getBookMark()
+        class UnBookmark(private val dao: MediaResponseDao) : AsyncTask<Int, Void, Void?>() {
+            override fun doInBackground(vararg params: Int?): Void? {
+                params[0]?.let {
+                    dao.setBookmarkTrue(it)
+                }
+                return null
             }
-
         }
-
 
     }
 }
