@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dearwolves.core.interfaces.IOnItemSelected
-import com.dearwolves.core.model.MediaResponse
+import com.dearwolves.core.model.database.MediaResponse
 import com.dearwolves.samplerecords.databinding.ItemMediaBinding
 
 class MediaListAdapter
@@ -34,7 +34,7 @@ internal constructor(context: Context, private var mData: List<MediaResponse>, p
     inner class ViewHolder internal constructor(val binding: ItemMediaBinding) : RecyclerView.ViewHolder(binding.root) {
         var media : MediaResponse? = null
 
-        fun bind(value:MediaResponse) {
+        fun bind(value: MediaResponse) {
             binding.viewHolder = this
             media = value
             binding.root.setOnClickListener {

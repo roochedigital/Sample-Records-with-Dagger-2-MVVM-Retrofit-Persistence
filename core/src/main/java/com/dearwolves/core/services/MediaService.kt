@@ -4,7 +4,7 @@ import com.dearwolves.core.R
 import com.dearwolves.core.interfaces.IMediaService
 import com.dearwolves.core.interfaces.IRestService
 import com.dearwolves.core.interfaces.IStringService
-import com.dearwolves.core.model.MediaResponse
+import com.dearwolves.core.model.database.MediaResponse
 import com.dearwolves.core.model.SearchRequest
 import com.dearwolves.core.model.dto.requests.SearchRequestDto
 import com.dearwolves.core.model.dto.responses.ListResponseDto
@@ -27,7 +27,11 @@ class MediaService (private val _restService: IRestService, private val _stringS
                 if (responseDto.isSuccessful && responseDto.body() != null) {
                     val list:ArrayList<MediaResponse> =  ArrayList()
                     val resp:ListResponseDto<MediaResponseDto> = responseDto.body()!!
-                    resp.results.forEach { list.add(MediaResponse(it)) }
+                    resp.results.forEach { list.add(
+                        MediaResponse(
+                            it
+                        )
+                    ) }
                     callback.onSuccess(list)
                 }
                 else {

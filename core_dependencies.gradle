@@ -11,13 +11,18 @@ dependencies {
     implementation "androidx.legacy:legacy-support-core-utils:${versions.legacy_support}"
     implementation "com.google.android.material:material:${versions.material}"
 
-
     // Dependency Injection - Dagger
     implementation "com.google.dagger:dagger:${versions.dagger}"
     implementation  "com.google.dagger:dagger-android:${versions.dagger}"
     kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
     kapt "com.google.dagger:dagger-android-processor:${versions.dagger}"
     compileOnly 'javax.annotation:jsr250-api:1.0'
+
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxandroid:${versions.rxjava}"
+
+    // ReactiveStreams support for LiveData
+    implementation "android.arch.lifecycle:reactivestreams:${versions.lifecycle}"
 
     // Rest Service - Retrofit
     implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"

@@ -5,6 +5,7 @@ import com.dearwolves.core.interfaces.IMediaService
 import com.dearwolves.core.interfaces.IRestService
 import com.dearwolves.core.interfaces.IStringService
 import com.dearwolves.core.room.database.RecordDatabase
+import com.dearwolves.core.services.repository.MoviesRepositoryService
 import dagger.Component
 import javax.inject.Singleton
 
@@ -15,6 +16,6 @@ interface CoreComponent {
     fun provideRestService(): IRestService
     fun provideMediaService(): IMediaService
     fun provideStringService(): IStringService
-    fun provideDatabase(): RecordDatabase
+    fun provideMoviesRepositoryService(): MoviesRepositoryService
 
 }

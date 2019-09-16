@@ -1,6 +1,6 @@
 package com.dearwolves.core.interfaces
 
-import com.dearwolves.core.model.MediaResponse
+import com.dearwolves.core.model.database.MediaResponse
 import com.dearwolves.core.model.SearchRequest
 import com.dearwolves.core.interfaces.callbacks.RestRequestCallback
 
