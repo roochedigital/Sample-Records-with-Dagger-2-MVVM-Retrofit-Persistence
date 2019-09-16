@@ -4,4 +4,10 @@
     <dimen name="album_title">12sp</dimen>
     <dimen name="secondary_text">10sp</dimen>
     <dimen name="card_radii">8dp</dimen>
+
+    <dimen name="guide_padding">20dp</dimen>
+
+
+    <dimen name="standard_horizontal_margin">16dp</dimen>
+    <dimen name="standard_vertical_margin">16dp</dimen>
 </resources>
