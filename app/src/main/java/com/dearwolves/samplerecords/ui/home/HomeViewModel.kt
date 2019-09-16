@@ -5,9 +5,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.dearwolves.core.interfaces.IMediaService
 import com.dearwolves.core.interfaces.IStringService
+import com.dearwolves.core.interfaces.callbacks.RestRequestCallback
 import com.dearwolves.core.model.MediaResponse
 import com.dearwolves.core.model.SearchRequest
-import com.dearwolves.core.rest.RestRequestCallback
 
 class HomeViewModel (private val mediaService: IMediaService, private val stringService: IStringService): ViewModel() {
     var data = ArrayList<MediaResponse>()

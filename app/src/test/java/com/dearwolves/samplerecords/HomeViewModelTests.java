@@ -10,7 +10,7 @@ import com.dearwolves.core.interfaces.IRestService;
 import com.dearwolves.core.interfaces.IStringService;
 import com.dearwolves.core.model.MediaResponse;
 import com.dearwolves.core.model.SearchRequest;
-import com.dearwolves.core.rest.RestRequestCallback;
+import com.dearwolves.core.interfaces.callbacks.RestRequestCallback;
 import com.dearwolves.samplerecords.ui.home.HomeViewModel;
 
 import org.junit.Before;

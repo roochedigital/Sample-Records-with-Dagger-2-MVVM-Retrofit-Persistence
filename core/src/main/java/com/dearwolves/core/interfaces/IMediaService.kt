@@ -2,7 +2,7 @@ package com.dearwolves.core.interfaces
 
 import com.dearwolves.core.model.MediaResponse
 import com.dearwolves.core.model.SearchRequest
-import com.dearwolves.core.rest.RestRequestCallback
+import com.dearwolves.core.interfaces.callbacks.RestRequestCallback
 
 interface IMediaService {
     fun search(

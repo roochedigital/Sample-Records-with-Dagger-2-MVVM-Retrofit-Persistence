@@ -9,7 +9,7 @@ import com.dearwolves.core.model.SearchRequest
 import com.dearwolves.core.model.dto.requests.SearchRequestDto
 import com.dearwolves.core.model.dto.responses.ListResponseDto
 import com.dearwolves.core.model.dto.responses.MediaResponseDto
-import com.dearwolves.core.rest.RestRequestCallback
+import com.dearwolves.core.interfaces.callbacks.RestRequestCallback
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
