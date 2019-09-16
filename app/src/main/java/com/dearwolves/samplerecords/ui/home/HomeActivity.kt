@@ -55,11 +55,8 @@ class HomeActivity : AppCompatActivity(), IOnItemSelected<MediaResponse> {
         binding.rvMedia.adapter = mediaListAdapter
 
 
-        localRepository.allData.observe(this, Observer { mediaListAdapter.notifyDataSetChanged() })
+        viewModel.getData().observe(this, Observer { mediaListAdapter.notifyDataSetChanged() })
 
-        viewModel.changesNotification.observe(this, Observer {
-            mediaListAdapter.notifyDataSetChanged()
-        })
         viewModel.error.observe(this, Observer { t ->
             Snackbar.make(binding.root, t, Snackbar.LENGTH_LONG).show()
         })

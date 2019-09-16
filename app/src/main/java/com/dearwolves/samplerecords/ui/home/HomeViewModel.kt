@@ -1,5 +1,6 @@
 package com.dearwolves.samplerecords.ui.home
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -11,16 +12,14 @@ import com.dearwolves.core.model.SearchRequest
 import com.dearwolves.core.repository.LocalRepository
 
 class HomeViewModel (private val mediaService: IMediaService, private val stringService: IStringService, private val localRepository: LocalRepository): ViewModel() {
-    var data = ArrayList<MediaResponse>()
 
     var error = MutableLiveData<String>()
-    var changesNotification = MutableLiveData<Void>()
     var loading = MutableLiveData<Boolean>()
     var emptyDisplayMessage = MutableLiveData<String>()
 
 
-    private val changeNotificationObserver = Observer<Void> {
-        if(data.size == 0) {
+    private val changeNotificationObserver = Observer<List<MediaResponse>> {
+        if(it.size == 0) {
             emptyDisplayMessage.value = "There is nothing here"
         }
         else {
@@ -29,7 +28,7 @@ class HomeViewModel (private val mediaService: IMediaService, private val string
     }
 
     fun init() {
-        changesNotification.observeForever(changeNotificationObserver)
+        getData().observeForever(changeNotificationObserver)
     }
 
 
@@ -38,8 +37,6 @@ class HomeViewModel (private val mediaService: IMediaService, private val string
         mediaService.search(searchRequest, object : RestRequestCallback<List<MediaResponse>> {
             override fun onSuccess(`object`: List<MediaResponse>) {
                 localRepository.insertData(`object`)
-                data.addAll(`object`)
-                changesNotification.value = null
                 loading.value = false
             }
 
@@ -48,12 +45,14 @@ class HomeViewModel (private val mediaService: IMediaService, private val string
                 loading.value = false
             }
         })
-
     }
 
-
     fun onDestroy() {
-        changesNotification.removeObserver(changeNotificationObserver)
+        getData().removeObserver(changeNotificationObserver)
+    }
+
+    fun getData(): LiveData<List<MediaResponse>> {
+        return localRepository.allData
     }
 
 }
