@@ -1,0 +1,5 @@
+dependencies {
+    testImplementation "junit:junit:${versions.junit}"
+    testImplementation "org.mockito:mockito-core:${versions.mockito}"
+    testImplementation "androidx.arch.core:core-testing:${versions.androidxArch}"
+}
