@@ -2,12 +2,19 @@ package com.dearwolves.samplerecords.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
+import android.transition.Visibility
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.Observable
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.room.util.StringUtil
 import com.dearwolves.core.interfaces.IMediaService
 import com.dearwolves.core.interfaces.IOnItemSelected
+import com.dearwolves.core.interfaces.ISharedPreferenceService
 import com.dearwolves.core.interfaces.IStringService
 import com.dearwolves.core.model.MediaResponse
 import com.dearwolves.core.model.SearchRequest
@@ -17,11 +24,12 @@ import com.dearwolves.samplerecords.RecordApp
 import com.dearwolves.samplerecords.databinding.ActivityHomeBinding
 import com.dearwolves.samplerecords.ui.detail.DetailActivity
 import com.google.android.material.snackbar.Snackbar
+import java.util.*
 import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity(), IOnItemSelected<MediaResponse> {
 
-    private val GridSize = 3
+    private val GRID_SIZE = 3
 
     @Inject
     lateinit var mediaService: IMediaService
@@ -31,6 +39,9 @@ class HomeActivity : AppCompatActivity(), IOnItemSelected<MediaResponse> {
 
     @Inject
     lateinit var localRepository: LocalRepository
+
+    @Inject
+    lateinit var sharedPreferenceService: ISharedPreferenceService
 
     private lateinit var viewModel: HomeViewModel
     lateinit var binding: ActivityHomeBinding
@@ -48,8 +59,13 @@ class HomeActivity : AppCompatActivity(), IOnItemSelected<MediaResponse> {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
+        if(viewModel.getBookmark() != null) {
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra(DetailActivity.ITEM, viewModel.getBookmark())
+            startActivity(intent)
+        }
 
-        binding.rvMedia.layoutManager  = GridLayoutManager(this, GridSize)
+        binding.rvMedia.layoutManager  = GridLayoutManager(this, GRID_SIZE)
         val mediaListAdapter =
             MediaListAdapter(this, localRepository.allData, this)
         binding.rvMedia.adapter = mediaListAdapter
@@ -64,12 +80,25 @@ class HomeActivity : AppCompatActivity(), IOnItemSelected<MediaResponse> {
         viewModel.init()
         viewModel.search(SearchRequest("star", "au", "movie"))
 
+        if(!TextUtils.isEmpty(sharedPreferenceService.getLastVisit())) {
+            val sb = StringBuilder()
+            sb.append("Last Visit: ").append(sharedPreferenceService.getLastVisit())
+
+            binding.lastVisit.text = sb.toString()
+        } else {
+            binding.lastVisit.visibility = View.INVISIBLE
+        }
     }
 
     override fun onSelected(item: MediaResponse) {
         val intent = Intent(this, DetailActivity::class.java)
-        //intent.putExtra(DetailActivity.Companion.Item, item)
+        intent.putExtra(DetailActivity.ITEM, item)
         startActivity(intent)
+    }
+
+    override fun onStop() {
+        sharedPreferenceService.saveLastVisit(Date())
+        super.onStop()
     }
 
     override fun onDestroy() {

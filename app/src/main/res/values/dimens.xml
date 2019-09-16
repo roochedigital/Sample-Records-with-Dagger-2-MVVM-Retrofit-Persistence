@@ -2,6 +2,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="padding">10dp</dimen>
     <dimen name="album_title">12sp</dimen>
+    <dimen name="last_visit">20sp</dimen>
     <dimen name="secondary_text">10sp</dimen>
     <dimen name="card_radii">8dp</dimen>
 

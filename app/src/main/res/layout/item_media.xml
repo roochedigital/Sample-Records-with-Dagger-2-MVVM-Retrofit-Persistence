@@ -28,7 +28,7 @@
                 android:load_img="@{viewHolder.imageUrl}"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:scaleType="center"
+                android:scaleType="fitXY"
                 android:contentDescription="@string/app_name"
                 android:paddingBottom="@dimen/padding"
                 app:layout_constraintTop_toTopOf="parent"

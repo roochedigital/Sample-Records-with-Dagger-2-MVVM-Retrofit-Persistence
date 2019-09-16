@@ -8,8 +8,6 @@ import com.dearwolves.core.room.database.RecordDatabase
 
 class LocalRepository(recordDatabase: RecordDatabase) {
 
-
-
     val dao:MediaResponseDao
     val allData: LiveData<List<MediaResponse>>
 
@@ -18,12 +16,20 @@ class LocalRepository(recordDatabase: RecordDatabase) {
         allData = dao.getAll()
     }
 
-    public fun insertData(mediaResponses: List<MediaResponse>) {
+    fun insertData(mediaResponses: List<MediaResponse>) {
         Insertion(dao).execute(mediaResponses)
     }
 
+    fun bookmarkData(trackId: Int) {
+        Bookmark(dao).execute(trackId)
+    }
+
+    fun getBookmark(): MediaResponse? {
+        return GetBookmark(dao).execute().get()
+    }
+
     companion object {
-        class Insertion : AsyncTask<List<MediaResponse>, Void, Void?> {
+        class Insertion(private val dao: MediaResponseDao) : AsyncTask<List<MediaResponse>, Void, Void?>() {
             override fun doInBackground(vararg params: List<MediaResponse>?): Void? {
                 params[0]?.let {
                     it.forEach { dao.insertAll(it) }
@@ -31,12 +37,25 @@ class LocalRepository(recordDatabase: RecordDatabase) {
                 return null
             }
 
-            val dao:MediaResponseDao
-            constructor(dao: MediaResponseDao) {
-                this.dao = dao
+        }
+
+        class Bookmark(private val dao: MediaResponseDao) : AsyncTask<Int, Void, Void?>() {
+            override fun doInBackground(vararg params: Int?): Void? {
+                params[0]?.let {
+                    dao.setBookmarkFalse()
+                    dao.setBookmarkTrue(it)
+                }
+                return null
+            }
+        }
+
+        class GetBookmark(private val dao: MediaResponseDao) : AsyncTask<Void, Void, MediaResponse?>() {
+            override fun doInBackground(vararg params: Void?): MediaResponse? {
+                return dao.getBookMark()
             }
 
-
         }
+
+
     }
 }

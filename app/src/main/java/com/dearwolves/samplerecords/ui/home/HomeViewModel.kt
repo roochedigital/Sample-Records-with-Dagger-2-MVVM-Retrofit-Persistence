@@ -1,5 +1,6 @@
 package com.dearwolves.samplerecords.ui.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -19,7 +20,7 @@ class HomeViewModel (private val mediaService: IMediaService, private val string
 
 
     private val changeNotificationObserver = Observer<List<MediaResponse>> {
-        if(it.size == 0) {
+        if(it.isEmpty()) {
             emptyDisplayMessage.value = "There is nothing here"
         }
         else {
@@ -29,6 +30,10 @@ class HomeViewModel (private val mediaService: IMediaService, private val string
 
     fun init() {
         getData().observeForever(changeNotificationObserver)
+    }
+
+    fun getBookmark(): MediaResponse? {
+        return localRepository.getBookmark()
     }
 
 

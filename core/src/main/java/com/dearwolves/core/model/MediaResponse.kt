@@ -1,12 +1,14 @@
 package com.dearwolves.core.model
 
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.dearwolves.core.model.dto.responses.MediaResponseDto
 
 @Entity
-class MediaResponse {
+class MediaResponse() : Parcelable {
 
     @PrimaryKey
     @ColumnInfo(name = "track_id")
@@ -27,7 +29,19 @@ class MediaResponse {
     @ColumnInfo(name = "long_description")
     var longDescription: String = ""
 
-    constructor(dto: MediaResponseDto) {
+    @ColumnInfo(name = "is_bookmark")
+    var isBookmark: Boolean = false
+
+    constructor(parcel: Parcel) : this() {
+        trackId = parcel.readInt()
+        trackName = parcel.readString()
+        artworkUrl100 = parcel.readString()
+        trackPrice = parcel.readDouble()
+        primaryGenreName = parcel.readString()
+        longDescription = parcel.readString()
+    }
+
+    constructor(dto: MediaResponseDto) : this() {
         this.trackId = dto.trackId
         this.trackName = dto.trackName
         this.primaryGenreName = dto.primaryGenreName
@@ -36,7 +50,30 @@ class MediaResponse {
         this.longDescription = dto.longDescription
     }
 
-    constructor(trackName: String) {
+    constructor(trackName: String) : this() {
         this.trackName = trackName
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(trackId)
+        parcel.writeString(trackName)
+        parcel.writeString(artworkUrl100)
+        parcel.writeDouble(trackPrice)
+        parcel.writeString(primaryGenreName)
+        parcel.writeString(longDescription)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<MediaResponse> {
+        override fun createFromParcel(parcel: Parcel): MediaResponse {
+            return MediaResponse(parcel)
+        }
+
+        override fun newArray(size: Int): Array<MediaResponse?> {
+            return arrayOfNulls(size)
+        }
     }
 }
