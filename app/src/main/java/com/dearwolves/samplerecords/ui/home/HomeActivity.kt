@@ -50,8 +50,8 @@ class HomeActivity : AppCompatActivity() {
             Snackbar.make(binding.root, t, Snackbar.LENGTH_LONG).show()
         })
 
-        val searchRequest = SearchRequest("star", "au", "movie")
-        viewModel.search(searchRequest)
+        viewModel.init()
+        viewModel.search(SearchRequest("star", "au", "movie"))
 
     }
 }
