@@ -69,4 +69,9 @@ class HomeActivity : AppCompatActivity(), IOnItemSelected<MediaResponse> {
         startActivity(intent)
 
     }
+
+    override fun onDestroy() {
+        viewModel.onDestroy()
+        super.onDestroy()
+    }
 }
