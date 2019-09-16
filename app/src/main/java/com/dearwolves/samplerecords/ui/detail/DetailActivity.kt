@@ -12,6 +12,12 @@ import javax.inject.Inject
 
 class DetailActivity : AppCompatActivity() {
 
+
+    companion object {
+        val Item = "Item"
+    }
+
+
     @Inject
     lateinit var mediaService: IMediaService
 
@@ -19,7 +25,7 @@ class DetailActivity : AppCompatActivity() {
     lateinit var stringService: IStringService
 
     private lateinit var viewModel: DetailViewModel
-    lateinit var binding: ActivityMovieDetailsBinding
+    private lateinit var binding: ActivityMovieDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

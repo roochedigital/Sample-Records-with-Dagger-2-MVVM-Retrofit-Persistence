@@ -1,20 +1,24 @@
 package com.dearwolves.samplerecords.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dearwolves.core.interfaces.IMediaService
+import com.dearwolves.core.interfaces.IOnItemSelected
 import com.dearwolves.core.interfaces.IStringService
+import com.dearwolves.core.model.MediaResponse
 import com.dearwolves.core.model.SearchRequest
 import com.dearwolves.samplerecords.R
 import com.dearwolves.samplerecords.RecordApp
 import com.dearwolves.samplerecords.databinding.ActivityHomeBinding
+import com.dearwolves.samplerecords.ui.detail.DetailActivity
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), IOnItemSelected<MediaResponse> {
 
     private val GridSize = 3
 
@@ -43,7 +47,7 @@ class HomeActivity : AppCompatActivity() {
 
         binding.rvMedia.layoutManager  = GridLayoutManager(this, GridSize)
         val mediaListAdapter =
-            MediaListAdapter(this, viewModel.data)
+            MediaListAdapter(this, viewModel.data, this)
         binding.rvMedia.adapter = mediaListAdapter
 
 
@@ -56,6 +60,13 @@ class HomeActivity : AppCompatActivity() {
 
         viewModel.init()
         viewModel.search(SearchRequest("star", "au", "movie"))
+
+    }
+
+    override fun onSelected(item: MediaResponse) {
+        val intent = Intent(this, DetailActivity::class.java)
+        //intent.putExtra(DetailActivity.Companion.Item, item)
+        startActivity(intent)
 
     }
 }

@@ -2,17 +2,16 @@ package com.dearwolves.samplerecords.ui.home
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.dearwolves.core.interfaces.IOnItemSelected
 import com.dearwolves.core.model.MediaResponse
 import com.dearwolves.samplerecords.databinding.ItemMediaBinding
 
 class MediaListAdapter
-internal constructor(context: Context, private var mData: List<MediaResponse>) :
+internal constructor(context: Context, private var mData: List<MediaResponse>, private val iOnClickListener: IOnItemSelected<MediaResponse>) :
     RecyclerView.Adapter<MediaListAdapter.ViewHolder>() {
     private val mInflater: LayoutInflater = LayoutInflater.from(context)
-    private var mClickListener: ItemClickListener? = null
 
     // inflates the row layout from xml when needed
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,21 +31,15 @@ internal constructor(context: Context, private var mData: List<MediaResponse>) :
     }
 
     // stores and recycles views as they are scrolled off screen
-    inner class ViewHolder internal constructor(val binding: ItemMediaBinding) : RecyclerView.ViewHolder(binding.root),
-        View.OnClickListener {
+    inner class ViewHolder internal constructor(val binding: ItemMediaBinding) : RecyclerView.ViewHolder(binding.root) {
         var media : MediaResponse? = null
-
-        init {
-            itemView.setOnClickListener(this)
-        }
-
-        override fun onClick(view: View) {
-            if (mClickListener != null) mClickListener!!.onItemClick(view, adapterPosition)
-        }
 
         fun bind(value:MediaResponse) {
             binding.viewHolder = this
             media = value
+            binding.root.setOnClickListener {
+                iOnClickListener.onSelected(value)
+            }
         }
 
         fun getTitle(): String {
@@ -64,15 +57,5 @@ internal constructor(context: Context, private var mData: List<MediaResponse>) :
         fun getImageUrl(): String {
             return if (media?.artworkUrl100 != null) (media?.artworkUrl100)!! else ""
         }
-    }
-
-    // allows clicks events to be caught
-    internal fun setClickListener(itemClickListener: ItemClickListener) {
-        this.mClickListener = itemClickListener
-    }
-
-    // parent activity will implement this method to respond to click events
-    interface ItemClickListener {
-        fun onItemClick(view: View, position: Int)
     }
 }
