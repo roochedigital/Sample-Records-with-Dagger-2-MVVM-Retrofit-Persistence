@@ -32,5 +32,9 @@ class DetailActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_movie_details)
         binding.lifecycleOwner = this
+
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Sample Title"
     }
 }
