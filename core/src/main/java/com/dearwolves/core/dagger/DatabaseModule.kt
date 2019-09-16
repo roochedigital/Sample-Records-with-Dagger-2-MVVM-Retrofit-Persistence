@@ -2,6 +2,7 @@ package com.dearwolves.core.dagger
 
 import android.content.Context
 import androidx.room.Room
+import com.dearwolves.core.repository.LocalRepository
 import com.dearwolves.core.room.database.RecordDatabase
 import dagger.Module
 import dagger.Provides
@@ -18,5 +19,9 @@ class DatabaseModule {
             RecordDatabase::class.java, "database-name"
         ).build()
     }
+
+    @Provides
+    @Singleton
+    fun provideLocalRepository(recordDatabase: RecordDatabase) = LocalRepository(recordDatabase)
 
 }

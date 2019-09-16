@@ -34,6 +34,6 @@ dependencies {
 
     // Room
     implementation "androidx.room:room-runtime:${versions.room}"
-    annotationProcessor "androidx.room:room-compiler:${versions.room}"
+    kapt "androidx.room:room-compiler:${versions.room}"
     implementation "androidx.room:room-ktx:${versions.room}"
 }

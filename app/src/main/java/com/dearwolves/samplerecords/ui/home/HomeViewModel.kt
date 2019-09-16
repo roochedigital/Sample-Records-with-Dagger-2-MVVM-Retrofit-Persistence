@@ -8,8 +8,9 @@ import com.dearwolves.core.interfaces.IStringService
 import com.dearwolves.core.interfaces.callbacks.RestRequestCallback
 import com.dearwolves.core.model.MediaResponse
 import com.dearwolves.core.model.SearchRequest
+import com.dearwolves.core.repository.LocalRepository
 
-class HomeViewModel (private val mediaService: IMediaService, private val stringService: IStringService): ViewModel() {
+class HomeViewModel (private val mediaService: IMediaService, private val stringService: IStringService, private val localRepository: LocalRepository): ViewModel() {
     var data = ArrayList<MediaResponse>()
 
     var error = MutableLiveData<String>()
@@ -36,6 +37,7 @@ class HomeViewModel (private val mediaService: IMediaService, private val string
         loading.value = true
         mediaService.search(searchRequest, object : RestRequestCallback<List<MediaResponse>> {
             override fun onSuccess(`object`: List<MediaResponse>) {
+                localRepository.insertData(`object`)
                 data.addAll(`object`)
                 changesNotification.value = null
                 loading.value = false

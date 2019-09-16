@@ -11,6 +11,7 @@ import com.dearwolves.core.interfaces.IOnItemSelected
 import com.dearwolves.core.interfaces.IStringService
 import com.dearwolves.core.model.MediaResponse
 import com.dearwolves.core.model.SearchRequest
+import com.dearwolves.core.repository.LocalRepository
 import com.dearwolves.samplerecords.R
 import com.dearwolves.samplerecords.RecordApp
 import com.dearwolves.samplerecords.databinding.ActivityHomeBinding
@@ -28,6 +29,9 @@ class HomeActivity : AppCompatActivity(), IOnItemSelected<MediaResponse> {
     @Inject
     lateinit var stringService: IStringService
 
+    @Inject
+    lateinit var localRepository: LocalRepository
+
     private lateinit var viewModel: HomeViewModel
     lateinit var binding: ActivityHomeBinding
 
@@ -38,7 +42,7 @@ class HomeActivity : AppCompatActivity(), IOnItemSelected<MediaResponse> {
             .getRecordComponent()
             .inject(this@HomeActivity)
 
-        viewModel = HomeViewModel(mediaService, stringService)
+        viewModel = HomeViewModel(mediaService, stringService, localRepository)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
         binding.lifecycleOwner = this
@@ -47,9 +51,11 @@ class HomeActivity : AppCompatActivity(), IOnItemSelected<MediaResponse> {
 
         binding.rvMedia.layoutManager  = GridLayoutManager(this, GridSize)
         val mediaListAdapter =
-            MediaListAdapter(this, viewModel.data, this)
+            MediaListAdapter(this, localRepository.allData, this)
         binding.rvMedia.adapter = mediaListAdapter
 
+
+        localRepository.allData.observe(this, Observer { mediaListAdapter.notifyDataSetChanged() })
 
         viewModel.changesNotification.observe(this, Observer {
             mediaListAdapter.notifyDataSetChanged()
@@ -67,7 +73,6 @@ class HomeActivity : AppCompatActivity(), IOnItemSelected<MediaResponse> {
         val intent = Intent(this, DetailActivity::class.java)
         //intent.putExtra(DetailActivity.Companion.Item, item)
         startActivity(intent)
-
     }
 
     override fun onDestroy() {
