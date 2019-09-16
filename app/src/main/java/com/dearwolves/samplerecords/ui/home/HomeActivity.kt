@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dearwolves.core.interfaces.IMediaService
+import com.dearwolves.core.interfaces.IStringService
 import com.dearwolves.core.model.SearchRequest
 import com.dearwolves.samplerecords.R
 import com.dearwolves.samplerecords.RecordApp
@@ -20,6 +21,9 @@ class HomeActivity : AppCompatActivity() {
     @Inject
     lateinit var mediaService: IMediaService
 
+    @Inject
+    lateinit var stringService: IStringService
+
     private lateinit var viewModel: HomeViewModel
     lateinit var binding: ActivityHomeBinding
 
@@ -30,7 +34,7 @@ class HomeActivity : AppCompatActivity() {
             .getRecordComponent()
             .inject(this@HomeActivity)
 
-        viewModel = HomeViewModel(mediaService)
+        viewModel = HomeViewModel(mediaService, stringService)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
         binding.lifecycleOwner = this

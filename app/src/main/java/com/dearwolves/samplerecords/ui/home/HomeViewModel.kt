@@ -3,11 +3,12 @@ package com.dearwolves.samplerecords.ui.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dearwolves.core.interfaces.IMediaService
+import com.dearwolves.core.interfaces.IStringService
 import com.dearwolves.core.model.MediaResponse
 import com.dearwolves.core.model.SearchRequest
 import com.dearwolves.core.rest.RestRequestCallback
 
-class HomeViewModel (private val mediaService: IMediaService): ViewModel() {
+class HomeViewModel (private val mediaService: IMediaService, private val stringService: IStringService): ViewModel() {
 
     var error = MutableLiveData<String>()
     var changesNotification = MutableLiveData<Void>()
