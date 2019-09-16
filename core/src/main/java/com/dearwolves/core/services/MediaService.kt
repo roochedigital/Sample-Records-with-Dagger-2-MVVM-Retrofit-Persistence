@@ -4,6 +4,8 @@ import com.dearwolves.core.R
 import com.dearwolves.core.interfaces.IMediaService
 import com.dearwolves.core.interfaces.IRestService
 import com.dearwolves.core.interfaces.IStringService
+import com.dearwolves.core.model.MediaResponse
+import com.dearwolves.core.model.SearchRequest
 import com.dearwolves.core.model.dto.requests.SearchRequestDto
 import com.dearwolves.core.model.dto.responses.ListResponseDto
 import com.dearwolves.core.model.dto.responses.MediaResponseDto
@@ -14,31 +16,23 @@ import retrofit2.Response
 
 class MediaService (private val _restService: IRestService, private val _stringService: IStringService) : IMediaService {
     override fun search(
-        searchRequest: SearchRequestDto,
-        callback: RestRequestCallback<ListResponseDto<MediaResponseDto>>
+        searchRequest: SearchRequest,
+        callback: RestRequestCallback<List<MediaResponse>>
     ) {
-        val responseCall = _restService.search(searchRequest.term, searchRequest.country, searchRequest.media)
-
+        val searchRequestDto = SearchRequestDto(searchRequest)
+        val responseCall = _restService.search(searchRequestDto.term, searchRequestDto.country, searchRequestDto.media)
         responseCall.enqueue(object: Callback<ListResponseDto<MediaResponseDto>> {
 
-            override fun onResponse(
-                call: Call<ListResponseDto<MediaResponseDto>>,
-                responseDto: Response<ListResponseDto<MediaResponseDto>>
-            ) {
-                if (responseDto.body() != null) {
-                    if (responseDto.isSuccessful) {
-                        val resp = responseDto.body()
-                        if (resp != null) {
-                            callback.onSuccess(resp)
-                            return
-                        } else {
-                            callback.onFailure(_stringService[R.string.process_request_error])
-                            return
-                        }
-                    }
+            override fun onResponse(call: Call<ListResponseDto<MediaResponseDto>>, responseDto: Response<ListResponseDto<MediaResponseDto>> ) {
+                if (responseDto.isSuccessful && responseDto.body() != null) {
+                    val list:ArrayList<MediaResponse> =  ArrayList()
+                    val resp:ListResponseDto<MediaResponseDto> = responseDto.body()!!
+                    resp.results.forEach { list.add(MediaResponse(it)) }
+                    callback.onSuccess(list)
                 }
-
-                callback.onFailure(_stringService[R.string.process_request_error])
+                else {
+                    callback.onFailure(_stringService[R.string.process_request_error])
+                }
             }
 
             override fun onFailure(call: Call<ListResponseDto<MediaResponseDto>>, t: Throwable) {

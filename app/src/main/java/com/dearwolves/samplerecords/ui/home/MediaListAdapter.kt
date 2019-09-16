@@ -5,12 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.dearwolves.core.model.dto.responses.ListResponseDto
-import com.dearwolves.core.model.dto.responses.MediaResponseDto
+import com.dearwolves.core.model.MediaResponse
 import com.dearwolves.samplerecords.databinding.ItemMediaBinding
 
 class MediaListAdapter
-internal constructor(context: Context, private var mData: ListResponseDto<MediaResponseDto>) :
+internal constructor(context: Context, private var mData: List<MediaResponse>) :
     RecyclerView.Adapter<MediaListAdapter.ViewHolder>() {
     private val mInflater: LayoutInflater = LayoutInflater.from(context)
     private var mClickListener: ItemClickListener? = null
@@ -23,29 +22,19 @@ internal constructor(context: Context, private var mData: ListResponseDto<MediaR
 
     // binds the data to the TextView in each row
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val data = mData.results.get(position)
+        val data = mData.get(position)
         holder.bind(data)
     }
 
     // total number of rows
     override fun getItemCount(): Int {
-        return mData.results.size
-    }
-
-    fun setData(data: ListResponseDto<MediaResponseDto>) {
-        mData = data
-        notifyDataSetChanged()
-
-    }
-
-    fun getItem(position: Int): MediaResponseDto {
-        return mData.results.get(position)
+        return mData.size
     }
 
     // stores and recycles views as they are scrolled off screen
     inner class ViewHolder internal constructor(val binding: ItemMediaBinding) : RecyclerView.ViewHolder(binding.root),
         View.OnClickListener {
-        var mediaDto :MediaResponseDto? = null
+        var media : MediaResponse? = null
 
         init {
             itemView.setOnClickListener(this)
@@ -55,25 +44,25 @@ internal constructor(context: Context, private var mData: ListResponseDto<MediaR
             if (mClickListener != null) mClickListener!!.onItemClick(view, adapterPosition)
         }
 
-        fun bind(value:MediaResponseDto) {
+        fun bind(value:MediaResponse) {
             binding.viewHolder = this
-            mediaDto = value
+            media = value
         }
 
         fun getTitle(): String {
-            return if (mediaDto?.trackName != null) (mediaDto?.trackName)!! else ""
+            return if (media?.trackName != null) (media?.trackName)!! else ""
         }
 
         fun getGenre(): String {
-            return if (mediaDto?.primaryGenreName != null) (mediaDto?.primaryGenreName)!! else ""
+            return if (media?.primaryGenreName != null) (media?.primaryGenreName)!! else ""
         }
 
         fun getPrice(): String {
-            return if (mediaDto?.trackPrice != null) (mediaDto?.trackPrice.toString()) else ""
+            return if (media?.trackPrice != null) (media?.trackPrice.toString()) else ""
         }
 
         fun getImageUrl(): String {
-            return if (mediaDto?.artworkUrl100 != null) (mediaDto?.artworkUrl100)!! else ""
+            return if (media?.artworkUrl100 != null) (media?.artworkUrl100)!! else ""
         }
     }
 

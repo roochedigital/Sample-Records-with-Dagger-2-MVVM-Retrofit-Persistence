@@ -1,13 +1,12 @@
 package com.dearwolves.core.interfaces
 
-import com.dearwolves.core.model.dto.requests.SearchRequestDto
-import com.dearwolves.core.model.dto.responses.ListResponseDto
-import com.dearwolves.core.model.dto.responses.MediaResponseDto
+import com.dearwolves.core.model.MediaResponse
+import com.dearwolves.core.model.SearchRequest
 import com.dearwolves.core.rest.RestRequestCallback
 
 interface IMediaService {
     fun search(
-        searchRequest: SearchRequestDto,
-        callback: RestRequestCallback<ListResponseDto<MediaResponseDto>>
+        searchRequest: SearchRequest,
+        callback: RestRequestCallback<List<MediaResponse>>
     )
 }

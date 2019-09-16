@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Core</string>
-    <string name="process_request_error">Something went wrong processing the request</string>
+    <string name="process_request_error">Something went wrong while processing the request</string>
 </resources>
