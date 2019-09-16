@@ -1,4 +1,7 @@
 package com.dearwolves.samplerecords.ui.detail
 
-class DetailViewModel {
+import androidx.lifecycle.ViewModel
+
+class DetailViewModel : ViewModel() {
+
 }

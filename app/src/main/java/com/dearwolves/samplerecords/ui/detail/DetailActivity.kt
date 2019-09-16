@@ -12,7 +12,6 @@ import javax.inject.Inject
 
 class DetailActivity : AppCompatActivity() {
 
-
     companion object {
         val Item = "Item"
     }
