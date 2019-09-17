@@ -1,5 +1,7 @@
 # Sample Records Dagger 2 MVVM Retrofit Persistence in Kotlin
 
+Install it here: https://i.diawi.com/23VT3Q
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/rjcristy/Sample-Records-with-Dagger-2-MVVM-Retrofit-Persistence/master/images/Screenshot_2019-09-17-09-42-16-439_com.dearwolves.samplerecords.png" width="250">
   <img src="https://raw.githubusercontent.com/rjcristy/Sample-Records-with-Dagger-2-MVVM-Retrofit-Persistence/master/images/Screenshot_2019-09-17-09-42-20-080_com.dearwolves.samplerecords.png" width="250">
