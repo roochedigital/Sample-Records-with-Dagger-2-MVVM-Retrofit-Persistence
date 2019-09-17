@@ -1,4 +1,6 @@
 # Sample Records Dagger 2 MVVM Retrofit Persistence in Kotlin
+![sample screenshot](https://raw.githubusercontent.com/rjcristy/Sample-Records-with-Dagger-2-MVVM-Retrofit-Persistence/master/images/Screenshot_1568683378.png) 
+![sample screenshot](https://raw.githubusercontent.com/rjcristy/Sample-Records-with-Dagger-2-MVVM-Retrofit-Persistence/master/images/Screenshot_1568683389.png)  
 
 This repository contains a detailed sample **Kotlin-based** app that implements **MVVM** and **Modularization** architecture using **Dagger2**, **Room**, **Glide**, **Retrofit**, and **Android Material Design**.
 
