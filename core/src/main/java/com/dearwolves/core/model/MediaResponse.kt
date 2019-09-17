@@ -39,6 +39,7 @@ class MediaResponse() : Parcelable {
         trackPrice = parcel.readDouble()
         primaryGenreName = parcel.readString()
         longDescription = parcel.readString()
+        isBookmark = parcel.readInt() == 1
     }
 
     constructor(dto: MediaResponseDto) : this() {
@@ -61,6 +62,7 @@ class MediaResponse() : Parcelable {
         parcel.writeDouble(trackPrice)
         parcel.writeString(primaryGenreName)
         parcel.writeString(longDescription)
+        parcel.writeInt(if(isBookmark )  1 else 0)
     }
 
     override fun describeContents(): Int {

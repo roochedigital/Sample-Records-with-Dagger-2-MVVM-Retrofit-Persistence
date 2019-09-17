@@ -2,6 +2,7 @@ package com.dearwolves.core.interfaces.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import androidx.room.OnConflictStrategy.REPLACE
 import com.dearwolves.core.model.MediaResponse
 
 @Dao
@@ -13,10 +14,10 @@ interface MediaResponseDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAll(vararg todo: MediaResponse)
 
-    @Query("UPDATE mediaresponse SET is_bookmark = 0 WHERE track_id = :trackId")
-    fun setBookmarkFalse(trackId: Int = 0)
+    @Query("SELECT * FROM mediaresponse WHERE track_id = :trackId")
+    fun get(trackId: Int): LiveData<MediaResponse>
 
-    @Query("UPDATE mediaresponse SET is_bookmark = 1 WHERE track_id = :trackId")
-    fun setBookmarkTrue(trackId: Int = 0)
+    @Update(onConflict = REPLACE)
+    fun updateItem(mediaResponse: MediaResponse)
 
 }

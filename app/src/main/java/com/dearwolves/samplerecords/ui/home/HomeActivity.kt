@@ -29,8 +29,9 @@ import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity(), IOnItemSelected<MediaResponse> {
 
-    private val GRID_SIZE = 3
-
+    companion object {
+        const val GRID_SIZE = 3
+    }
     @Inject
     lateinit var mediaService: IMediaService
 
@@ -59,11 +60,6 @@ class HomeActivity : AppCompatActivity(), IOnItemSelected<MediaResponse> {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        if(viewModel.getBookmark() != null) {
-            val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra(DetailActivity.ITEM, viewModel.getBookmark())
-            startActivity(intent)
-        }
 
         binding.rvMedia.layoutManager  = GridLayoutManager(this, GRID_SIZE)
         val mediaListAdapter =

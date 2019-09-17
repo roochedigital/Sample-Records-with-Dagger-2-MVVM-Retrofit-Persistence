@@ -2,6 +2,7 @@ package com.dearwolves.core.repository
 
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
+import com.dearwolves.core.interfaces.IOnComplete
 import com.dearwolves.core.interfaces.dao.MediaResponseDao
 import com.dearwolves.core.model.MediaResponse
 import com.dearwolves.core.room.database.RecordDatabase
@@ -16,17 +17,16 @@ class LocalRepository(recordDatabase: RecordDatabase) {
         allData = dao.getAll()
     }
 
+    fun getItem(trackId: Int) : LiveData<MediaResponse> {
+        return dao.get(trackId)
+    }
+
     fun insertData(mediaResponses: List<MediaResponse>) {
         Insertion(dao).execute(mediaResponses)
     }
 
-    fun bookmarkData(trackId: Int, toBookmark:Boolean) {
-        if (toBookmark) {
-            Bookmark(dao).execute(trackId)
-        }
-        else {
-            UnBookmark(dao).execute(trackId)
-        }
+    fun updateItem(mediaResponse: MediaResponse, onComplete: IOnComplete) {
+        UpdateItem(dao, onComplete).execute(mediaResponse)
     }
 
     companion object {
@@ -40,22 +40,20 @@ class LocalRepository(recordDatabase: RecordDatabase) {
 
         }
 
-        class Bookmark(private val dao: MediaResponseDao) : AsyncTask<Int, Void, Void?>() {
-            override fun doInBackground(vararg params: Int?): Void? {
-                params[0]?.let {
-                    dao.setBookmarkTrue(it)
+        class UpdateItem(private val dao: MediaResponseDao , private val onComplete: IOnComplete) : AsyncTask<MediaResponse, Void, Void?>() {
+            override fun doInBackground(vararg params: MediaResponse): Void? {
+                params[0].let {
+                    dao.updateItem(it)
                 }
                 return null
             }
-        }
 
-        class UnBookmark(private val dao: MediaResponseDao) : AsyncTask<Int, Void, Void?>() {
-            override fun doInBackground(vararg params: Int?): Void? {
-                params[0]?.let {
-                    dao.setBookmarkTrue(it)
-                }
-                return null
+            override fun onPostExecute(result: Void?) {
+                super.onPostExecute(result)
+                onComplete.onComplete()
             }
+
+
         }
 
     }

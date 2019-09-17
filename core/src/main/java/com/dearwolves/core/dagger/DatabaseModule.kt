@@ -17,7 +17,9 @@ class DatabaseModule {
         return Room.databaseBuilder(
             context,
             RecordDatabase::class.java, "database-name"
-        ).build()
+        )
+            .allowMainThreadQueries()
+            .fallbackToDestructiveMigration().build()
     }
 
     @Provides

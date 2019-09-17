@@ -2,7 +2,9 @@ package com.dearwolves.samplerecords.ui.detail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.dearwolves.core.interfaces.IMediaService
 import com.dearwolves.core.interfaces.IStringService
 import com.dearwolves.core.model.MediaResponse
@@ -17,7 +19,6 @@ class DetailActivity : AppCompatActivity() {
     companion object {
         const val ITEM = "ITEM"
     }
-
 
     @Inject
     lateinit var mediaService: IMediaService
@@ -41,7 +42,6 @@ class DetailActivity : AppCompatActivity() {
         val i = intent
         val mediaResponse:MediaResponse = i.getParcelableExtra(ITEM)
 
-
         viewModel = DetailViewModel(mediaResponse, localRepository)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_movie_details)
@@ -50,5 +50,15 @@ class DetailActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = mediaResponse.trackName
+
+
+        viewModel.isBookmarked.observe(this, Observer { t ->
+            binding.bookmarkButton.setImageDrawable(
+                ContextCompat.getDrawable(this@DetailActivity,
+                    if(t) R.drawable.ic_star_black_24dp else R.drawable.ic_bookmark_black_24dp))
+        })
+
+        viewModel.init()
+
     }
 }
